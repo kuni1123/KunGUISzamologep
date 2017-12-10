@@ -21,9 +21,15 @@ public class Ablak {
                 int osszeg = 0;
 
                 try{
-                    String[] szamok = tf_szamok.getText().split(",");
-                    osszeg = add(szamok);
+                    if(tf_szamok.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "A beírt számok összege: 0");
+                    }
+                    else{
+                        String[] szamok = tf_szamok.getText().split(",");
+                        osszeg = add(szamok);
                         JOptionPane.showMessageDialog(null, "A beírt számok összege: " + osszeg);
+                    }
+
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(null,"Nem a megfelelő elválasztó karaktert használta!");
                 }
