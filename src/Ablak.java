@@ -5,10 +5,20 @@ import java.awt.event.ActionListener;
 
 public class Ablak {
     private JPanel panel1;
+    int minuszDarab = 0;
+    private JButton bt_szamol;
+    private JTextField tf_szamok;
+    private JComboBox cb_elvalasztoKarakterek;
+    public int osszeg=0;
 
-
+    String minuszok = "Nem írhatóak be negatív számok. Az ön által megadott negatív számok: ";
     int add(String[] szamok){
         for (int i=0;i<szamok.length;i++){
+            if(Integer.parseInt(szamok[i])<0) {
+                minuszok+=" "+szamok[i];
+                minuszDarab++;
+            }
+            else
                 osszeg += Integer.parseInt(szamok[i]);
         }
         return osszeg;
@@ -19,17 +29,16 @@ public class Ablak {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int osszeg = 0;
-
+                Character[] karakterek = {',','!','%','/','=',':','_','>',';','<'};
+                String karakter = ""+karakterek[cb_elvalasztoKarakterek.getSelectedIndex()];
                 try{
-                    if(tf_szamok.getText().isEmpty()){
-                        JOptionPane.showMessageDialog(null, "A beírt számok összege: 0");
-                    }
-                    else{
-                        String[] szamok = tf_szamok.getText().split(",");
-                        osszeg = add(szamok);
+                    String[] szamok = tf_szamok.getText().split(karakter);
+                    osszeg = add(szamok);
+                    if(minuszDarab>0){
+                        JOptionPane.showMessageDialog(null,minuszok+"");
+                    }else {
                         JOptionPane.showMessageDialog(null, "A beírt számok összege: " + osszeg);
                     }
-
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(null,"Nem a megfelelő elválasztó karaktert használta!");
                 }
@@ -40,11 +49,6 @@ public class Ablak {
     public JPanel getPanel1() {
         return panel1;
     }
-
-    private JButton bt_szamol;
-    private JTextField tf_szamok;
-    private JComboBox cb_elvalasztoKarakterek;
-    public int osszeg=0;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Számológép");
