@@ -13,6 +13,7 @@ public class Ablak {
 
     String minuszok = "Nem írhatóak be negatív számok. Az ön által megadott negatív számok: ";
     int add(String[] szamok){
+        osszeg=0;
         for (int i=0;i<szamok.length;i++){
             if(Integer.parseInt(szamok[i])<0) {
                 minuszok+=" "+szamok[i];
@@ -28,7 +29,7 @@ public class Ablak {
         bt_szamol.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int osszeg = 0;
+                int osszeg;
                 Character[] karakterek = {',','!','%','/','=',':','_','>',';','<'};
                 String karakter = ""+karakterek[cb_elvalasztoKarakterek.getSelectedIndex()];
                 try{
